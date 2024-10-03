@@ -8,6 +8,7 @@ import { DragDropModule } from 'primeng/dragdrop';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
@@ -38,6 +39,7 @@ import { PeriodPipe } from './pipes/period.pipe';
     DialogModule,
     ButtonModule,
     InputTextModule,
+    InputTextareaModule,
     InputNumberModule,
     DropdownModule,
     CalendarModule,

@@ -1,8 +1,13 @@
 <p-dialog header="Add" [modal]="true" [(visible)]="visible" (onHide)="close()">
 
     <div class="field">
-        <label for="name">名稱</label>
+        <label for="name">任務</label>
         <input pInputText id="name" autocomplete="off" [(ngModel)]="task.name" />
+    </div>
+
+    <div class="field">
+        <label for="description">任務說明</label>
+        <textarea pInputTextarea  id="description" [(ngModel)]="task.description"></textarea>
     </div>
 
     <div class="field">
@@ -25,7 +30,9 @@
         <p-dropdown inputId="state" appendTo="body" styleClass="w-100" [options]="options.states" optionLabel="label" optionValue="value" [(ngModel)]="task.state" />
     </div>
 
-    <div class="ctrl">
-        <button pButton pRipple label="Save" (click)="save()"></button>
-    </div>
+    <ng-template pTemplate="footer">
+        <div class="ctrl">
+            <button pButton pRipple label="Save" (click)="save()"></button>
+        </div>
+    </ng-template>
 </p-dialog>

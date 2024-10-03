@@ -15,7 +15,7 @@
                     <li class="task" [ngClass]="task.state ? '' : 'complete'"
                         pDraggable (onDragStart)="dragStart(w, t)">
                         <p>{{ task.tasker }}
-                            <a (click)="showEditDialog(task)">{{ task.name }}</a>
+                            <button class="btn-link name" (click)="showEditDialog(task)">{{ task.name }}</button>
                         </p>
                     </li>
                 </ng-container>

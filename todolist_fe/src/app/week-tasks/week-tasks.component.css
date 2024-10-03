@@ -57,6 +57,10 @@
     color: var(--light);
     background: var(--secondary);
 }
+.task .name {
+    display: contents;
+    color: inherit;
+}
 
 .task p {
     line-height: 1.2;
