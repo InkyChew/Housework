@@ -1,0 +1,123 @@
+@layer normalize, primeng;
+@import "normalize.css" layer(normalize-reset);
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+:root {
+    --primary: #E59560;
+    --secondary: #BACEC1;
+    --light: #F6F4E8;
+    --dark: #1D3124;
+}
+
+body {
+    color: var(--dark);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.p-button {
+    background: var(--primary);
+    border: 1px solid var(--primary);
+}
+.p-button:enabled:hover {
+    background: #e28e56;
+    border-color: #e28e56;
+}
+.p-button:focus {
+    box-shadow: 0 0 0 0.1rem #eb965d;
+    border-color: var(--light);
+}
+.p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
+    background: var(--secondary);
+    border: 1px solid var(--secondary);
+}
+.p-button.p-button-danger:enabled:hover, .p-buttonset.p-button-danger > .p-button:enabled:hover, .p-splitbutton.p-button-danger > .p-button:enabled:hover {
+    background: #a2bdab;
+    border-color: #a2bdab;
+}
+.p-button.p-button-danger:enabled:focus {
+    box-shadow: 0 0 0 0.1rem #b9d4c2;
+    border-color: var(--light);
+}
+
+.p-inputtext,
+.p-dropdown {
+    color: var(--dark);
+    background: var(--light);
+    border: 1px solid var(--secondary);
+}
+.p-inputtext:enabled:hover,
+.p-dropdown:not(.p-disabled):hover {
+    border-color: var(--dark);
+}
+
+.p-inputtext:enabled:focus,
+.p-dropdown:not(.p-disabled).p-focus {
+    box-shadow: 0 0 0 0.2rem var(--secondary);
+    border-color: var(--dark);
+}
+
+.p-dropdown .p-dropdown-label {
+    border: 0 none;
+}
+
+.p-dropdown-panel {
+    color: var(--dark);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+    color: var(--dark);
+    background: var(--secondary);
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+    color: var(--dark);
+    background: var(--light);
+}
+
+.p-dialog .p-dialog-header,
+.p-dialog .p-dialog-content {
+    color: var(--dark);
+    background: var(--light);
+}
+
+.p-dialog .p-dialog-header .p-dialog-header-icon {
+    color: var(--dark);
+}
+.p-dialog .p-dialog-header .p-dialog-header-icon:enabled:hover {
+    color: var(--dark);
+    background: var(--secondary);
+}
+
+.p-datepicker {
+    color: var(--dark);
+}
+.p-datepicker table td {
+    padding: 0;
+}
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight,
+.p-datepicker table td > span.p-highlight {
+    color: var(--light);
+    background: var(--primary)
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus,
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus,
+.p-datepicker table td > span:focus {
+    box-shadow: 0 0 0 0.2rem #eb965d;
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover,
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover,
+.p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover {
+    color: var(--light);
+    background: var(--secondary)
+}
+.p-datepicker table td.p-datepicker-today > span {
+    background: transparent;
+    color: var(--primary);
+}
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover, .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
+    color: var(--primary);
+}

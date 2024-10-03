@@ -1,0 +1,69 @@
+.week-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+
+.week-header .title {
+    position: relative;
+}
+.week-header .title h2 {
+    margin: 0;
+}
+.week-header .title input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.week-header .title input:focus {
+    opacity: 1;
+}
+
+.week {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    border-top: 1px solid var(--secondary);
+}
+
+.day:not(:first-child) {
+    border-left: 1px solid var(--secondary);
+}
+
+.day h3 {
+    text-align: center;
+}
+
+.day .tasks {
+    display: grid;
+    grid-auto-rows: 1fr;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.task {
+    height: 2.9em;
+    padding: .25em;
+    color: var(--light);
+    background: var(--primary);
+}
+.task.complete {
+    color: var(--light);
+    background: var(--secondary);
+}
+
+.task p {
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}

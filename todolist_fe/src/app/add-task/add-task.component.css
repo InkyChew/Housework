@@ -1,0 +1,11 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.ctrl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

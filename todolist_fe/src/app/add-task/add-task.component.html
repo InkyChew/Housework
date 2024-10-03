@@ -1,0 +1,31 @@
+<p-dialog header="Add" [modal]="true" [(visible)]="visible" (onHide)="close()">
+
+    <div class="field">
+        <label for="name">名稱</label>
+        <input pInputText id="name" autocomplete="off" [(ngModel)]="task.name" />
+    </div>
+
+    <div class="field">
+        <label for="tasker">執行人</label>
+        <p-dropdown inputId="tasker" appendTo="body" styleClass="w-100" [options]="options.taskers" [(ngModel)]="task.tasker" />
+    </div>
+
+    <div class="field">
+        <label for="date">日期</label>
+        <p-calendar inputId="date" appendTo="body" [(ngModel)]="task.date" dateFormat="yy/mm/dd" />
+    </div>
+
+    <div class="field">
+        <label for="period">重複</label>
+        <p-dropdown inputId="period" appendTo="body" styleClass="w-100" [options]="options.periods" />
+    </div>
+
+    <div class="field">
+        <label for="state">狀態</label>
+        <p-dropdown inputId="state" appendTo="body" styleClass="w-100" [options]="options.states" optionLabel="label" optionValue="value" [(ngModel)]="task.state" />
+    </div>
+
+    <div class="ctrl">
+        <button pButton pRipple label="Save" (click)="save()"></button>
+    </div>
+</p-dialog>
