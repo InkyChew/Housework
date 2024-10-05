@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Task } from '../models/task';
+import { Task, WorkSearchParam } from '../models/task';
+import { WorkService } from '../services/work.service';
 
 @Component({
   selector: 'app-week-tasks',
@@ -9,29 +10,46 @@ import { Task } from '../models/task';
 export class WeekTasksComponent {
 
   title: string = "家事週計劃";
-  weekTasks = [
-    {week: 7, tasks: [{tasker: "🐨", name: "清理陽台", state: 1, date: new Date("2024-09-29")}]},
-    {week: 1, tasks: [{tasker: "🐻", name: "清理臥室", state: 0, date: new Date("2024-09-30")}]},
-    {week: 2, tasks: [{tasker: "🐻‍❄️", name: "倒垃圾", state: 0, date: new Date("2024-10-01")}]},
-    {week: 3, tasks: [{tasker: "🐨", name: "洗衣服", state: 1, date: new Date("2024-10-02")}]},
-    {week: 4, tasks: [{tasker: "🐼", name: "清理浴室", state: 0, date: new Date("2024-10-03")}]},
-    {week: 5, tasks: [{tasker: "🐻", name: "清理冰箱", state: 1, date: new Date("2024-10-04")}]},
-    {week: 6, tasks: [{tasker: "🐨", name: "採買物品", state: 1, date: new Date("2024-10-05")}]}
-  ];
-  draggedTask = new Array(2);
+  weekTasks = this._service.initWeekTasks();
 
-  dragStart(w: number, t: number) {
-    this.draggedTask = [w, t];
+  constructor(private _service: WorkService) { }
+
+  ngOnInit() {
+    this.getTasks();    
   }
 
-  drop(i: number) {
+  getTasks() {
+    const {sun, sat} = this._service.getCurrentWeekRange();
+    const params = {...new WorkSearchParam(), startDate: sun, endDate: sat};
+    this._service.getAll(params).subscribe(tasks => {
+      this.weekTasks = this._service.groupByDate(tasks);
+    });
+  }  
+  
+  add(task: Task) {
+    this._service.post(task).subscribe(() => this.getTasks());
+  }
+
+  edit(task: Task) {
+    this._service.put(task).subscribe(() => this.getTasks());
+  }
+
+  delete(task: Task) {
+    this._service.delete(task.id).subscribe(() => this.getTasks());
+  }
+
+  draggedTask?: {dayIndex: number, taskIndex: number};
+  dragStart(dayIndex: number, taskIndex: number) {
+    this.draggedTask = {dayIndex, taskIndex};
+  }
+  drop(dropIndex: number) {
     if (this.draggedTask) {
-      const draggedWeekIndex = this.draggedTask[0];
-      const draggedTaskIndex = this.draggedTask[1];
-      const task = this.weekTasks[draggedWeekIndex].tasks[draggedTaskIndex];
-      this.weekTasks[i].tasks.push(task);
-      this.weekTasks[draggedWeekIndex].tasks.splice(draggedTaskIndex, 1);
-      this.draggedTask = [];
+      const {dayIndex, taskIndex} = this.draggedTask;
+      const task = this.weekTasks[dayIndex].tasks[taskIndex];
+      if(dayIndex != dropIndex) {
+        task.date = this.weekTasks[dropIndex].date;
+        this.edit(task);
+      }
     }
   }
 
@@ -44,22 +62,6 @@ export class WeekTasksComponent {
   }
   showEditDialog(task: any) {
     this.isEdit = true;
-    this.editTask = task;
-  }
-  
-  add(e: any) {
-    console.log(e);
-    
-    // this.add = false;
-  }
-
-  edit(e: any) {
-    console.log(e);
-    // this.edit = false
-  }
-
-  delete(e: any) {
-    console.log(e);
-    // this.edit = false
+    this.editTask = {...task, date: new Date(task.date)};
   }
 }

@@ -6,10 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class WeekPipe implements PipeTransform {
 
   // weeks = ['一', '二', '三', '四', '五', '六', '日'];
-  weeks = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   transform(value: number, ...args: unknown[]): unknown {
-    return this.weeks[value-1];
+    return this.weeks[value];
   }
 
 }

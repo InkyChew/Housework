@@ -23,7 +23,7 @@
 
         <div class="field">
             <label for="period">重複</label>
-            <p-dropdown inputId="period" appendTo="body" styleClass="w-100" [options]="options.periods" />
+            <p-dropdown inputId="period" appendTo="body" styleClass="w-100" [options]="options.periods" optionLabel="label" optionValue="value" [(ngModel)]="task.period" />
         </div>
     
         <div class="field">

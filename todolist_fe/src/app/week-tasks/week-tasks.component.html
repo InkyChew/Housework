@@ -9,7 +9,7 @@
 <article class="week">
     <ng-container *ngFor="let weekTask of weekTasks; index as w">
         <section class="day" pDroppable (onDrop)="drop(w)">
-            <h3>{{ weekTask.week | week }}</h3>
+            <h3>{{ weekTask.day | week }}</h3>
             <ul class="tasks">
                 <ng-container *ngFor="let task of weekTask.tasks; index as t">
                     <li class="task" [ngClass]="task.state ? '' : 'complete'"
