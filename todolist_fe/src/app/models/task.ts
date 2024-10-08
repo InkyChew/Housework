@@ -28,3 +28,14 @@ export class WorkSearchParam {
     endDate: Date | null = null;
     state: State | null = null;
 }
+
+export interface IOperTask {
+    oper: Oper,
+    task: Task
+}
+
+export enum Oper {
+    Delete,
+    Add,
+    Edit
+}

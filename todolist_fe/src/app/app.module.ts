@@ -5,15 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { DragDropModule } from 'primeng/dragdrop';
-import { DialogModule } from 'primeng/dialog';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { DropdownModule } from 'primeng/dropdown';
-import { CalendarModule } from 'primeng/calendar';
-import { TableModule } from 'primeng/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { WeekTasksComponent } from './week-tasks/week-tasks.component';
@@ -37,15 +36,14 @@ import { PeriodPipe } from './pipes/period.pipe';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    DragDropModule,
-    DialogModule,
-    ButtonModule,
-    InputTextModule,
-    InputTextareaModule,
-    InputNumberModule,
-    DropdownModule,
-    CalendarModule,
-    TableModule
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

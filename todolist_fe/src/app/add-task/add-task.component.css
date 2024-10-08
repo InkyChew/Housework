@@ -1,3 +1,10 @@
+:host {
+    display: block;
+    background: var(--light);
+    border-radius: 8px;
+    padding: 1em;
+}
+
 .field {
     display: flex;
     flex-direction: column;
@@ -10,5 +17,5 @@
 .ctrl {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }

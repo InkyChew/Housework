@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from '../models/task';
+import { Component, Inject } from '@angular/core';
+import { IOperTask, Oper, Task } from '../models/task';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-edit-task',
@@ -8,12 +9,8 @@ import { Task } from '../models/task';
 })
 export class EditTaskComponent {
 
-  @Input() visible: boolean = false;
-  @Input() task?: Task;
-  @Output() onSave = new EventEmitter<Task>();
-  @Output() onDelete = new EventEmitter<Task>();
-  @Output() onVisibleChange = new EventEmitter<boolean>();
-
+  oper: Oper = this.data.oper;
+  task: Task = this.data.task;
   options = {
     periods: [{label: "不要重複", value: 0},
       {label: "每日", value: 1},
@@ -24,18 +21,24 @@ export class EditTaskComponent {
     taskers: ["🐨", "🐼", "🐻"]
   }
 
-  save() {
-    this.onSave.emit(this.task);
-    this.close();
+  constructor(private _dialogRef: DialogRef<IOperTask>, @Inject(DIALOG_DATA) public data: IOperTask) {}
+
+  getTitle(oper: Oper) {
+    switch(oper) {
+      case Oper.Delete:
+        return "Delete";
+      case Oper.Add:
+        return "Add";
+      case Oper.Edit:
+        return "Edit";
+    }
   }
 
-  delete() {
-    this.onDelete.emit(this.task);
-    this.close();
+  save(oper: Oper) {
+    this._dialogRef.close({oper: oper, task: this.task});
   }
 
   close() {
-    this.visible = false;
-    this.onVisibleChange.emit(this.visible);
+    this._dialogRef.close();
   }
 }

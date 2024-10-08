@@ -1,41 +1,66 @@
-<ng-container *ngIf="task">
-    <p-dialog header="Edit" [modal]="true" [(visible)]="visible" (onHide)="close()">
-    
-        <div class="field">
-            <label for="name">任務</label>
-            <input pInputText id="name" autocomplete="off" [(ngModel)]="task.name" />
-        </div>
-    
-        <div class="field">
-            <label for="description">任務說明</label>
-            <textarea pInputTextarea  id="description" [(ngModel)]="task.description"></textarea>
-        </div>
-    
-        <div class="field">
-            <label for="tasker">執行人</label>
-            <p-dropdown inputId="tasker" appendTo="body" styleClass="w-100" [options]="options.taskers" [(ngModel)]="task.tasker" />
-        </div>
-    
-        <div class="field">
-            <label for="date">日期</label>
-            <p-calendar inputId="date" appendTo="body" [(ngModel)]="task.date" dateFormat="yy/mm/dd" />
-        </div>
+<h2 mat-dialog-title>{{ getTitle(oper) }}</h2>
+<mat-dialog-content>
+    <div class="field">
+        <label for="name">任務</label>
+        <mat-form-field>
+            <input matInput id="name" autocomplete="off" [(ngModel)]="task.name" />
+        </mat-form-field>
+    </div>
 
-        <div class="field">
-            <label for="period">重複</label>
-            <p-dropdown inputId="period" appendTo="body" styleClass="w-100" [options]="options.periods" optionLabel="label" optionValue="value" [(ngModel)]="task.period" />
-        </div>
-    
-        <div class="field">
-            <label for="state">狀態</label>
-            <p-dropdown inputId="state" appendTo="body" styleClass="w-100" [options]="options.states" optionLabel="label" optionValue="value" [(ngModel)]="task.state" />
-        </div>
-    
-        <ng-template pTemplate="footer">
-            <div class="ctrl">
-                <button pButton pRipple class="p-button-danger" (click)="delete()">Delete</button>
-                <button pButton pRipple (click)="save()">Save</button>
-            </div>
-        </ng-template>
-    </p-dialog>
-</ng-container>
+    <div class="field">
+        <label for="description">任務說明</label>
+        <mat-form-field>
+            <textarea matInput id="description" [(ngModel)]="task.description"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div class="field">
+        <label for="tasker">執行人</label>
+        <mat-form-field>
+            <mat-select [(ngModel)]="task.tasker">
+                <ng-container *ngFor="let tasker of options.taskers">
+                    <mat-option [value]="tasker">{{ tasker }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="field">
+        <label for="date">日期</label>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="task.date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="field">
+        <label for="period">重複</label>
+        <mat-form-field>
+            <mat-select [(ngModel)]="task.period">
+                <ng-container *ngFor="let period of options.periods">
+                    <mat-option [value]="period.value">{{ period.label }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="field">
+        <label for="state">狀態</label>
+        <mat-form-field>
+            <mat-select [(ngModel)]="task.state">
+                <ng-container *ngFor="let state of options.states">
+                    <mat-option [value]="state.value">{{ state.label }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div class="ctrl">
+        <button *ngIf="oper == 2" mat-stroked-button class="warn" (click)="save(0)">Delete</button>
+        <button mat-flat-button color="primary" (click)="save(oper)">Save</button>
+        <button mat-stroked-button (click)="close()">Cancel</button>
+    </div>
+</mat-dialog-actions>

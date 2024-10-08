@@ -1,38 +1,70 @@
-<p-dialog header="Add" [modal]="true" [(visible)]="visible" (onHide)="close()">
-
+<h2 mat-dialog-title>Add</h2>
+<mat-dialog-content>
     <div class="field">
         <label for="name">任務</label>
-        <input pInputText id="name" autocomplete="off" [(ngModel)]="task.name" />
+        <mat-form-field>
+            <input matInput id="name" autocomplete="off" [(ngModel)]="task.name" />
+        </mat-form-field>
     </div>
 
     <div class="field">
         <label for="description">任務說明</label>
-        <textarea pInputTextarea  id="description" [(ngModel)]="task.description"></textarea>
+        <mat-form-field>
+            <textarea matInput id="description" [(ngModel)]="task.description"></textarea>
+        </mat-form-field>
     </div>
 
     <div class="field">
         <label for="tasker">執行人</label>
-        <p-dropdown inputId="tasker" appendTo="body" styleClass="w-100" [options]="options.taskers" [(ngModel)]="task.tasker" />
+        <mat-form-field>
+            <!-- <mat-label>執行人</mat-label> -->
+            <mat-select [(ngModel)]="task.tasker">
+                <ng-container *ngFor="let tasker of options.taskers">
+                    <mat-option [value]="tasker">{{ tasker }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
     </div>
 
     <div class="field">
         <label for="date">日期</label>
-        <p-calendar inputId="date" appendTo="body" [(ngModel)]="task.date" dateFormat="yy/mm/dd" />
+        <mat-form-field>
+            <!-- <mat-label>日期</mat-label> -->
+            <input matInput [matDatepicker]="picker" [(ngModel)]="task.date">
+            <!-- <mat-hint>YY/MM/DD</mat-hint> -->
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
     </div>
 
     <div class="field">
         <label for="period">重複</label>
-        <p-dropdown inputId="period" appendTo="body" styleClass="w-100" [options]="options.periods" optionLabel="label" optionValue="value" [(ngModel)]="task.period" />
+        <mat-form-field>
+            <!-- <mat-label>重複</mat-label> -->
+            <mat-select [(ngModel)]="task.period">
+                <ng-container *ngFor="let period of options.periods">
+                    <mat-option [value]="period.value">{{ period.label }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
     </div>
 
     <div class="field">
         <label for="state">狀態</label>
-        <p-dropdown inputId="state" appendTo="body" styleClass="w-100" [options]="options.states" optionLabel="label" optionValue="value" [(ngModel)]="task.state" />
+        <mat-form-field>
+            <!-- <mat-label>狀態</mat-label> -->
+            <mat-select [(ngModel)]="task.state">
+                <ng-container *ngFor="let state of options.states">
+                    <mat-option [value]="state.value">{{ state.label }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
     </div>
+</mat-dialog-content>
 
-    <ng-template pTemplate="footer">
-        <div class="ctrl">
-            <button pButton pRipple label="Save" (click)="save()"></button>
-        </div>
-    </ng-template>
-</p-dialog>
+<mat-dialog-actions>
+    <div class="ctrl">
+        <button mat-flat-button color="primary" (click)="save()">Save</button>
+        <button mat-flat-button (click)="close()">Cancel</button>
+    </div>
+</mat-dialog-actions>

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { Task, WorkSearchParam } from '../models/task';
+import { IOperTask, Oper, Task, WorkSearchParam } from '../models/task';
 import { WorkService } from '../services/work.service';
+import { Dialog } from '@angular/cdk/dialog';
+import { AddTaskComponent } from '../add-task/add-task.component';
+import { EditTaskComponent } from '../edit-task/edit-task.component';
 
 @Component({
   selector: 'app-week-tasks',
@@ -12,7 +15,8 @@ export class WeekTasksComponent {
   title: string = "家事週計劃";
   weekTasks = this._service.initWeekTasks();
 
-  constructor(private _service: WorkService) { }
+  constructor(private _service: WorkService,
+    private _dialog: Dialog) { }
 
   ngOnInit() {
     this.getTasks();    
@@ -25,7 +29,39 @@ export class WeekTasksComponent {
       this.weekTasks = this._service.groupByDate(tasks);
     });
   }  
+
+  openAddDialog(): void {
+    const dialogRef = this._dialog.open<Task>(AddTaskComponent);
+
+    dialogRef.closed.subscribe(task => {
+      if(task) console.log(task);
+        // this._service.post(task).subscribe(() => this.getTasks());
+    });
+  }
+
+  openDialog(editTask?: Task): void {
+    const data = editTask ? { oper: Oper.Edit, task: editTask } : { oper: Oper.Add, task: new Task() };
   
+    const dialogRef = this._dialog.open<IOperTask>(EditTaskComponent, {data: data});
+
+    dialogRef.closed.subscribe(data => {
+      console.log(data);
+      if(data) {
+        switch(data.oper) {
+          case Oper.Delete:
+            this.delete(data.task.id);
+            break;
+          case Oper.Add:
+            this.add(data.task);
+            break;
+          case Oper.Edit:
+            this.edit(data.task);
+            break;
+        }
+      }
+    });
+  }
+
   add(task: Task) {
     this._service.post(task).subscribe(() => this.getTasks());
   }
@@ -34,8 +70,8 @@ export class WeekTasksComponent {
     this._service.put(task).subscribe(() => this.getTasks());
   }
 
-  delete(task: Task) {
-    this._service.delete(task.id).subscribe(() => this.getTasks());
+  delete(id: number) {
+    this._service.delete(id).subscribe(() => this.getTasks());
   }
 
   draggedTask?: {dayIndex: number, taskIndex: number};
@@ -51,17 +87,5 @@ export class WeekTasksComponent {
         this.edit(task);
       }
     }
-  }
-
-  isAdd: boolean = false;
-  isEdit: boolean = false;
-  editTask?: Task;
-
-  showAddDialog() {
-    this.isAdd = true;
-  }
-  showEditDialog(task: any) {
-    this.isEdit = true;
-    this.editTask = {...task, date: new Date(task.date)};
   }
 }

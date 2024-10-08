@@ -1,3 +1,10 @@
+:host {
+    display: block;
+    background: var(--light);
+    border-radius: 8px;
+    padding: 1em;
+}
+
 .field {
     display: flex;
     flex-direction: column;

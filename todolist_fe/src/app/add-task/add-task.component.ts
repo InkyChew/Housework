@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Task } from '../models/task';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-add-task',
@@ -7,10 +8,6 @@ import { Task } from '../models/task';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
-
-  @Input() visible: boolean = false;
-  @Output() onSave = new EventEmitter<Task>();
-  @Output() onVisibleChange = new EventEmitter<boolean>();
   
   task: Task = new Task();
   options = {
@@ -23,14 +20,13 @@ export class AddTaskComponent {
     taskers: ["🐨", "🐼", "🐻"]
   };
 
+  constructor(private _dialogRef: DialogRef<Task>) {}
+
   save() {
-    this.onSave.emit(this.task);
-    this.close();
+    this._dialogRef.close(this.task);
   }
 
   close() {
-    this.visible = false;
-    this.task = new Task();
-    this.onVisibleChange.emit(this.visible);
+    this._dialogRef.close();
   }
 }
