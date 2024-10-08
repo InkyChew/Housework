@@ -1,0 +1,89 @@
+<h2 mat-dialog-title>{{ getTitle(oper) }}</h2>
+<form [formGroup]="taskForm" (ngSubmit)="save(oper)">
+    <mat-dialog-content>
+        <div class="field">
+            <label for="name">任務</label>
+            <mat-form-field hintLabel="Max 20 characters">
+                <input id="name" matInput #name maxlength="20" formControlName="name" />
+                <mat-hint align="end">{{name.value.length}}/20</mat-hint>
+                <mat-error *ngIf="taskForm.get('name')?.hasError('required')">
+                    請輸入任務名稱
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <label for="description">任務說明</label>
+            <mat-form-field hintLabel="Max 200 characters">
+                <textarea id="description" matInput #description maxlength="200"
+                    formControlName="description"></textarea>
+                <mat-hint align="end">{{description.value.length}}/200</mat-hint>
+                <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
+                    請輸入任務說明
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <label for="tasker">執行人</label>
+            <mat-form-field>
+                <mat-select formControlName="tasker">
+                    <ng-container *ngFor="let tasker of options.taskers">
+                        <mat-option [value]="tasker">{{ tasker }}</mat-option>
+                    </ng-container>
+                </mat-select>
+                <mat-error *ngIf="taskForm.get('tasker')?.hasError('required')">
+                    請選擇執行人
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <label for="date">日期</label>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled="false"></mat-datepicker>
+                <mat-error *ngIf="taskForm.get('date')?.hasError('required')">
+                    請選擇日期
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <label for="period">重複</label>
+            <mat-form-field>
+                <mat-select formControlName="period">
+                    <ng-container *ngFor="let period of options.periods">
+                        <mat-option [value]="period.value">{{ period.label }}</mat-option>
+                    </ng-container>
+                </mat-select>
+                <mat-error *ngIf="taskForm.get('period')?.hasError('required')">
+                    請選擇重複
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <label for="state">狀態</label>
+            <mat-form-field>
+                <mat-select formControlName="state">
+                    <ng-container *ngFor="let state of options.states">
+                        <mat-option [value]="state.value">{{ state.label }}</mat-option>
+                    </ng-container>
+                </mat-select>
+                <mat-error *ngIf="taskForm.get('state')?.hasError('required')">
+                    請選擇狀態
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <div class="ctrl">
+            <button *ngIf="oper == 2" mat-stroked-button class="warn" (click)="save(0)">Delete</button>
+            <button mat-flat-button color="primary" type="submit">Save</button>
+            <button mat-stroked-button (click)="close()">Cancel</button>
+        </div>
+    </mat-dialog-actions>
+</form>

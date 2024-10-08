@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { IOperTask, Oper, Task, WorkSearchParam } from '../models/task';
 import { WorkService } from '../services/work.service';
 import { Dialog } from '@angular/cdk/dialog';
-import { AddTaskComponent } from '../add-task/add-task.component';
-import { EditTaskComponent } from '../edit-task/edit-task.component';
+import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 
 @Component({
   selector: 'app-week-tasks',
@@ -28,21 +27,12 @@ export class WeekTasksComponent {
     this._service.getAll(params).subscribe(tasks => {
       this.weekTasks = this._service.groupByDate(tasks);
     });
-  }  
-
-  openAddDialog(): void {
-    const dialogRef = this._dialog.open<Task>(AddTaskComponent);
-
-    dialogRef.closed.subscribe(task => {
-      if(task) console.log(task);
-        // this._service.post(task).subscribe(() => this.getTasks());
-    });
   }
 
   openDialog(editTask?: Task): void {
     const data = editTask ? { oper: Oper.Edit, task: editTask } : { oper: Oper.Add, task: new Task() };
   
-    const dialogRef = this._dialog.open<IOperTask>(EditTaskComponent, {data: data});
+    const dialogRef = this._dialog.open<IOperTask>(TaskDialogComponent, {data: data});
 
     dialogRef.closed.subscribe(data => {
       console.log(data);
