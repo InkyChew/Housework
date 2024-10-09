@@ -22,18 +22,18 @@
 }
 .week-header .title input:focus {
     opacity: 1;
-    background: var(--light);
+    background: var(--primary-50);
 }
 
 .week {
     height: 100%;
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    border-top: 1px solid var(--secondary);
+    border-top: 1px solid var(--primary-200);
 }
 
 .day:not(:first-child) {
-    border-left: 1px solid var(--secondary);
+    border-left: 1px solid var(--primary-200);
 }
 
 .day h3 {
@@ -55,8 +55,8 @@
     background: var(--primary);
 }
 .task.complete {
-    color: var(--light);
-    background: var(--secondary);
+    color: var(--dark);
+    background: var(--primary-50);
 }
 .task .name {
     display: contents;

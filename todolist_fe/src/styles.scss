@@ -1,0 +1,140 @@
+@use '@angular/material' as mat;
+@include mat.core();
+@import "normalize.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+:root {
+    --primary: #673ab7;
+    --primary-50: #EDE7F6;
+    --primary-200: #b39ddb;
+    --primary-700: #512DA8;
+    --secondary: #ffd740;
+    --light: #fff;
+    --dark: rgba(0, 0, 0, 0.87);
+}
+
+
+// $primary-palette: (
+//     50:  #FBEFE9,
+//     100: #F6D5C7,
+//     200: #F0BBA3,
+//     300: #EAA07E,
+//     400: #E58A63,
+//     500: #E59560,
+//     600: #E18D58,
+//     700: #DB834E,
+//     800: #D57845,
+//     900: #CB6635,
+//     contrast: (
+//         50: #1D3124,
+//         100: #1D3124,
+//         200: #1D3124,
+//         300: #1D3124,
+//         400: #F6F4E8,
+//         500: #F6F4E8,
+//         600: #F6F4E8,
+//         700: #F6F4E8,
+//         800: #F6F4E8,
+//         900: #F6F4E8
+//     )
+// );
+
+// $light-green-palette: (
+//   50:  #F2F7F5,
+//   100: #DFECE7,
+//   200: #CCE0D9,
+//   300: #B8D4CB,
+//   400: #A9CABE,
+//   500: #BACEC1,
+//   600: #A1C0B2,
+//   700: #88B3A3,
+//   800: #6FA594,
+//   900: #568885,
+//   contrast: (
+//     50:  #1D3124,
+//     100: #1D3124,
+//     200: #1D3124,
+//     300: #1D3124,
+//     400: #1D3124,
+//     500: #1D3124,
+//     600: #F6F4E8,
+//     700: #F6F4E8,
+//     800: #F6F4E8,
+//     900: #F6F4E8
+//   )
+// );
+
+// $dark-green-palette: (
+//   50:  #E6EBE8,
+//   100: #C0D0C5,
+//   200: #97B3A0,
+//   300: #6E957A,
+//   400: #4F7C5E,
+//   500: #1D3124,
+//   600: #1A2C20,
+//   700: #152519,
+//   800: #101F14,
+//   900: #08150A,
+//   contrast: (
+//     50:  #1D3124,
+//     100: #1D3124,
+//     200: #1D3124,
+//     300: #F6F4E8,
+//     400: #F6F4E8,
+//     500: #F6F4E8,
+//     600: #F6F4E8,
+//     700: #F6F4E8,
+//     800: #F6F4E8,
+//     900: #F6F4E8
+//   )
+// );
+
+// $dark-theme: mat.define-dark-theme((
+//     color: (
+//         primary: mat.define-palette($primary-palette),
+//         accent: mat.define-palette(mat.$blue-grey-palette),
+//     )
+// ));
+
+// $light-theme: mat.define-light-theme((
+//     color: (
+//         primary: mat.define-palette($primary-palette),
+//         accent: mat.define-palette($dark-green-palette),
+//     ),
+// ));
+
+// @include mat.all-component-themes($dark-theme);
+
+// @media (prefers-color-scheme: light) {
+//     @include mat.all-component-themes($light-theme);
+// }
+
+.btn-link {
+    background: transparent;
+    padding: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--light);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #a2bdab;
+}

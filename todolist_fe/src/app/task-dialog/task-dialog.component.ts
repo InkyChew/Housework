@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-task-dialog',
   templateUrl: './task-dialog.component.html',
-  styleUrls: ['./task-dialog.component.css']
+  styleUrls: ['./task-dialog.component.scss']
 })
 export class TaskDialogComponent {
 

@@ -7,7 +7,7 @@ import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 @Component({
   selector: 'app-week-tasks',
   templateUrl: './week-tasks.component.html',
-  styleUrls: ['./week-tasks.component.css']
+  styleUrls: ['./week-tasks.component.scss']
 })
 export class WeekTasksComponent {
 
