@@ -6,13 +6,13 @@
     <button mat-flat-button color="primary" (click)="openDialog()"><i class="fa-solid fa-plus"></i></button>
 </header>
 
-<article class="week">
+<article class="week" cdkDropListGroup>
     <ng-container *ngFor="let weekTask of weekTasks; index as w">
         <section class="day" cdkDropList [cdkDropListData]="weekTask.tasks">
             <h3>{{ weekTask.day | week }}</h3>
             <ul class="tasks">
                 <ng-container *ngFor="let task of weekTask.tasks; index as t">
-                    <li class="task" [ngClass]="task.state ? '' : 'complete'" cdkDrag (onDragStart)="dragStart(w, t)">
+                    <li class="task" [ngClass]="task.state ? '' : 'complete'" cdkDrag>
                         <p>{{ task.tasker }}
                             <button mat-button class="btn-link name" (click)="openDialog(task)">{{ task.name }}</button>
                         </p>

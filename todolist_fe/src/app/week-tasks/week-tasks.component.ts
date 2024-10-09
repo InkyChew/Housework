@@ -3,6 +3,7 @@ import { IOperTask, Oper, Task, WorkSearchParam } from '../models/task';
 import { WorkService } from '../services/work.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-week-tasks',
@@ -13,9 +14,10 @@ export class WeekTasksComponent {
 
   title: string = "家事週計劃";
   weekTasks = this._service.initWeekTasks();
+  private _updatePriority$ = this._service.initUpdatePriority$();
 
   constructor(private _service: WorkService,
-    private _dialog: Dialog) { }
+    private _dialog: Dialog) {}
 
   ngOnInit() {
     this.getTasks();    
@@ -64,18 +66,18 @@ export class WeekTasksComponent {
     this._service.delete(id).subscribe(() => this.getTasks());
   }
 
-  draggedTask?: {dayIndex: number, taskIndex: number};
-  dragStart(dayIndex: number, taskIndex: number) {
-    this.draggedTask = {dayIndex, taskIndex};
-  }
-  drop(dropIndex: number) {
-    if (this.draggedTask) {
-      const {dayIndex, taskIndex} = this.draggedTask;
-      const task = this.weekTasks[dayIndex].tasks[taskIndex];
-      if(dayIndex != dropIndex) {
-        task.date = this.weekTasks[dropIndex].date;
-        this.edit(task);
-      }
+  drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log("update priority");
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      console.log("update date");
     }
   }
 }

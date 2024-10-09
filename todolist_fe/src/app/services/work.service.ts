@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Task, WorkSearchParam } from '../models/task';
 import { EnvService } from './env.service';
+import { of, debounceTime, switchMap, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,20 @@ export class WorkService {
 
   put(task: Task) {
     return this._http.put(this._env.APIOption.work, task);
+  }
+
+
+  private _updatePriority$ = new Subject<Task[]>();
+  initUpdatePriority$(): Subject<Task[]> {
+    this._updatePriority$.pipe(
+      debounceTime(300),
+      switchMap((tasks) => this.updatePriority(tasks))
+    ).subscribe();
+    return this._updatePriority$;
+  }
+
+  updatePriority(tasks: Task[]) {
+    return this._http.patch(this._env.APIOption.work, tasks);
   }
 
   delete(id: number) {

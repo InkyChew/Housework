@@ -57,6 +57,26 @@ namespace todolist_be.Controllers
             }
         }
 
+        [HttpPatch]
+        public async Task<IActionResult> UpdateWorkPriority([FromBody] List<Work> works)
+        {
+            try
+            {
+                await _service.UpdateWorkPriorityAsync(works);
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log.Error(ex, "An error occurred while updating work priority");
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "An error occurred while updating work priority");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWork(int id)
         {
