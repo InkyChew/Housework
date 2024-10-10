@@ -38,6 +38,7 @@
 
 .day h3 {
     text-align: center;
+    margin: 1em 0;
 }
 
 .day .tasks {
@@ -45,14 +46,14 @@
     grid-auto-rows: 1fr;
     padding: 0;
     margin: 0;
-    list-style-type: none;
 }
 
 .task {
-    height: 2.9em;
+    display: block;
     padding: .25em;
     color: var(--light);
     background: var(--primary);
+    list-style-type: none;
 }
 .task.complete {
     color: var(--dark);
@@ -66,7 +67,7 @@
 .task p {
     line-height: 1.2;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

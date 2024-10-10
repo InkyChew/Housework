@@ -66,18 +66,15 @@ export class WeekTasksComponent {
     this._service.delete(id).subscribe(() => this.getTasks());
   }
 
-  drop(event: CdkDragDrop<Task[]>) {
+  drop(event: CdkDragDrop<Task[]>, date: Date) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log("update priority");
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      console.log("update date");
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      event.item.data.date = date.toDateString();
     }
+
+    event.container.data.forEach((t, i) => t.priority = i);    
+    this._updatePriority$.next(event.container.data);
   }
 }

@@ -44,7 +44,7 @@ namespace todolist_be.Repos
                 query = query.Where(t => t.Date <= searchParam.EndDate);
             }
 
-            return await query.OrderBy(t => t.Date).ToListAsync();
+            return await query.OrderBy(t => t.Date).ThenBy(t => t.Priority).ToListAsync();
         }
 
         public async Task<Work?> FindWorkAsync(int id)

@@ -76,6 +76,7 @@ namespace todolist_be.Services
             foreach (var work in works)
             {
                 var dbWork = await _repo.FindWorkAsync(work.Id) ?? throw new InvalidOperationException($"No entity found with id {work.Id}.");
+                dbWork.Date = work.Date;
                 dbWork.Priority = work.Priority;
             }
             await _repo.SaveChangesAsync();
