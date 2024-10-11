@@ -19,6 +19,8 @@ import { WeekTasksComponent } from './week-tasks/week-tasks.component';
 import { WeekPipe } from './pipes/week.pipe';
 import { PeriodPipe } from './pipes/period.pipe';
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
+import { TaskerChartComponent } from './tasker-chart/tasker-chart.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { TaskDialogComponent } from './task-dialog/task-dialog.component';
     WeekTasksComponent,
     WeekPipe,
     PeriodPipe,
-    TaskDialogComponent
+    TaskDialogComponent,
+    TaskerChartComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
