@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ getTitle(oper) }}</h2>
-<form [formGroup]="taskForm" (ngSubmit)="save(oper)">
-    <mat-dialog-content>
+<mat-dialog-content>
+    <form [formGroup]="taskForm">
         <div class="field">
             <label for="name">任務</label>
             <mat-form-field hintLabel="Max 20 characters">
@@ -77,13 +77,13 @@
                 </mat-error>
             </mat-form-field>
         </div>
-    </mat-dialog-content>
+    </form>
+</mat-dialog-content>
 
-    <mat-dialog-actions>
-        <div class="ctrl">
-            <button *ngIf="oper == 2" mat-stroked-button class="warn" (click)="save(0)">Delete</button>
-            <button mat-flat-button color="primary" type="submit">Save</button>
-            <button mat-stroked-button (click)="close()">Cancel</button>
-        </div>
-    </mat-dialog-actions>
-</form>
+<mat-dialog-actions>
+    <div class="ctrl">
+        <button *ngIf="oper == 2" mat-stroked-button class="warn" (click)="save(0)">Delete</button>
+        <button mat-flat-button color="primary" (click)="save(oper)">Save</button>
+        <button mat-stroked-button (click)="close()">Cancel</button>
+    </div>
+</mat-dialog-actions>
